@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><title>Кое-что личное</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--a:#7b4fb8;--b:#c9a4f0;--c:#f6d9ff;--ink:#3a2158;--card:rgba(255,255,255,.38);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:"Nunito","Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#b98ae8,#d9b6f5 55%,#f0c9ee);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.bk i{position:fixed;border-radius:50%;background:rgba(255,255,255,.28);filter:blur(6px);animation:fl 14s ease-in-out infinite alternate}
+@keyframes fl{to{transform:translate(30px,-60px) scale(1.2)}}
+.card{position:relative;width:min(88vw,360px);min-height:460px;padding:26px 22px;border-radius:32px;background:var(--card);border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 20px 60px rgba(90,40,140,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.scr{display:none;width:100%;flex-direction:column;align-items:center;gap:14px;animation:in .45s ease}
+.scr.on{display:flex}
+@keyframes in{from{opacity:0;transform:scale(.96)}}
+h1{font-size:25px;line-height:1.15;margin:0;font-weight:900}
+p{margin:0;font-size:14px;opacity:.75}
+.dots{position:absolute;top:14px;display:flex;gap:6px}.dots b{width:18px;height:4px;border-radius:4px;background:rgba(58,33,88,.2)}.dots b.on{background:var(--a)}
+button{font:inherit;font-weight:800;border:0;border-radius:999px;padding:12px 26px;background:#fff;color:var(--ink);box-shadow:0 6px 18px rgba(90,40,140,.22);cursor:pointer;transition:transform .15s}
+button:active{transform:scale(.94)}
+button.p{background:var(--a);color:#fff}a.btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:800;border-radius:999px;padding:12px 26px;background:#fff;color:var(--ink);box-shadow:0 6px 18px rgba(90,40,140,.22)}a.btn.p{background:var(--a);color:#fff}
+.row{display:flex;gap:14px;align-items:center;min-height:50px}
+#no{position:relative;background:rgba(255,255,255,.55);box-shadow:none}
+input{font:inherit;width:100%;padding:13px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.6);color:var(--ink);outline:0}
+input:focus-visible,button:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.opt{border-radius:20px;padding:16px 6px;font-size:14px;display:flex;flex-direction:column;gap:6px;align-items:center;background:rgba(255,255,255,.5);box-shadow:none;border:2px solid transparent}
+.opt span{font-size:30px}.opt.sel{background:#fff;border-color:var(--a)}
+.sum{width:100%;background:rgba(255,255,255,.55);border-radius:18px;padding:14px;font-size:15px;font-weight:700;line-height:1.6}
+.glass{width:150px;height:150px;border-radius:30px;background:rgba(255,255,255,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:54px;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.pet{width:120px;height:110px;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.h{position:fixed;pointer-events:none;font-size:18px;z-index:9;animation:fall 2.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(360deg);opacity:.2}}
+#ig{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:12px;font-weight:800;opacity:.6}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="bk"><i style="width:90px;height:90px;left:6%;top:12%"></i><i style="width:60px;height:60px;right:10%;top:30%;animation-delay:-4s"></i><i style="width:120px;height:120px;left:60%;bottom:8%;animation-delay:-8s"></i></div>
+
+<main class="card">
+<div class="dots" id="dots"><b class="on"></b><b></b><b></b><b></b></div>
+
+<section class="scr on" id="s0">
+ <div class="glass">💌</div>
+ <h1>За этим стеклом — кое-что личное</h1>
+ <p>Нажми, чтобы открыть</p>
+ <button class="p" onclick="go(1)">Открыть</button>
+</section>
+
+<section class="scr" id="s1">
+ <svg class="pet" viewBox="0 0 120 110"><use href="#cat"/></svg>
+ <h1 id="q">Пойдёшь со мной на свидание? 💗</h1>
+ <div class="row"><button class="p" id="yes" onclick="yes()">Да 💕</button><button id="no">Нет</button></div>
+ <p id="hint"></p>
+</section>
+
+<section class="scr" id="s2">
+ <svg class="pet" viewBox="0 0 120 110"><use href="#cat"/></svg>
+ <h1>Когда тебе удобно? 📅</h1>
+ <input type="date" id="d" aria-label="Дата"><input type="time" id="t" value="19:00" aria-label="Время">
+ <button class="p" onclick="step3()">Подтвердить</button>
+</section>
+
+<section class="scr" id="s3">
+ <svg class="pet" viewBox="0 0 120 110"><use href="#cat"/></svg>
+ <h1>Чем займёмся? 😋</h1>
+ <div class="grid" id="g"></div>
+ <button class="p" id="nx" onclick="done()" disabled style="opacity:.5">Далее</button>
+</section>
+
+<section class="scr" id="s4">
+ <svg class="pet" viewBox="0 0 120 110"><use href="#cat"/></svg>
+ <h1>Ура! Это свидание 🎉</h1>
+ <div class="sum" id="sum"></div>
+ <a class="btn p" id="gm" target="_blank" rel="noopener">Отправить через Gmail 💌</a><a class="btn" id="ml" target="_blank" rel="noopener">Открыть в почтовом приложении</a><button id="cp" onclick="copy()">Скопировать ответ</button>
+</section>
+</main>
+<div id="ig">@твой.ник</div>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="cat">
+ <path d="M24 44 22 10 48 28ZM96 44 98 10 72 28Z" fill="#e9cfae"/><path d="M28 36 27 20 40 29ZM92 36 93 20 80 29Z" fill="#f6a8c0"/>
+ <ellipse cx="60" cy="64" rx="46" ry="38" fill="#f3dcc0"/>
+ <circle cx="42" cy="62" r="5" fill="#3a2158"/><circle cx="78" cy="62" r="5" fill="#3a2158"/><circle cx="43.5" cy="60" r="1.6" fill="#fff"/><circle cx="79.5" cy="60" r="1.6" fill="#fff"/>
+ <ellipse cx="32" cy="74" rx="8" ry="5" fill="#f6a8c0" opacity=".7"/><ellipse cx="88" cy="74" rx="8" ry="5" fill="#f6a8c0" opacity=".7"/>
+ <path d="M54 72q6 6 12 0" stroke="#3a2158" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M58 68h4l-2 3Z" fill="#d97b99"/>
+</g></defs></svg>
+
+<script>
+const $=id=>document.getElementById(id);let cur=0,pick="",nos=0;
+const phrases=["Ты уверена? 🥺","Подумай ещё!","Ну пожалуйста 💔","Кнопка сбегает 🏃"];
+function go(n){document.querySelectorAll('.scr').forEach(e=>e.classList.remove('on'));$('s'+n).classList.add('on');cur=n;
+ document.querySelectorAll('#dots b').forEach((b,i)=>b.classList.toggle('on',i<=Math.max(0,n-1)));$('dots').style.display=n===0?'none':'flex'}
+$('dots').style.display='none';
+function hearts(n=40){for(let i=0;i<n;i++){const h=document.createElement('div');h.className='h';h.textContent=['💗','💕','💖','✨'][i%4];
+ h.style.left=Math.random()*100+'vw';h.style.top='-20px';h.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),3600)}}
+const no=$('no');
+function flee(e){e&&e.preventDefault();nos++;$('hint').textContent=phrases[Math.min(nos-1,3)];
+ const x=(Math.random()-.5)*200,y=(Math.random()-.5)*200;no.style.transform=`translate(${x}px,${y}px)`;
+ if(nos>4){no.style.display='none'}}
+no.addEventListener('pointerenter',flee);no.addEventListener('click',flee);
+let confirmed=false;
+function yes(){if(!confirmed){confirmed=true;$('q').textContent='Подожди, ты правда сказала «да»? 😳';$('yes').textContent='Да, правда!';$('hint').textContent='';no.style.display='none';return}
+ hearts();setTimeout(()=>{go(2)},700)}
+const d=new Date();d.setDate(d.getDate()+3);$('d').value=d.toISOString().slice(0,10);
+function step3(){if(!$('d').value)return;hearts(20);go(3)}
+const acts=[["🍷","Ужин"],["🎬","Кино"],["🌳","Прогулка"],["☕","Кофе"]];
+acts.forEach(([e,n])=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<span>${e}</span>${n}`;
+ b.onclick=()=>{document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));b.classList.add('sel');pick=e+" "+n;$('nx').disabled=false;$('nx').style.opacity=1};$('g').appendChild(b)});
+function fmt(){const dt=new Date($('d').value+'T00:00');return dt.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'})+', '+$('t').value}
+function done(){$('sum').innerHTML=`📅 ${fmt()}<br>${pick}`;setLinks();hearts(60);go(4)}
+const MY_EMAIL="vaseacondrea2@gmail.com";
+function msg(){return {s:'Она сказала «да»! 💕',b:'Я согласна! 💕\n'+fmt()+'\n'+pick}}
+function setLinks(){const m=msg(),s=encodeURIComponent(m.s),b=encodeURIComponent(m.b);$('gm').href='https://mail.google.com/mail/?view=cm&fs=1&to='+MY_EMAIL+'&su='+s+'&body='+b;$('ml').href='mailto:'+MY_EMAIL+'?subject='+s+'&body='+b}
+async function copy(){try{await navigator.clipboard.writeText(msg().b);$('cp').textContent='Скопировано ✓'}catch(e){$('cp').textContent=msg().b}}
+function sendMail(){const s=encodeURIComponent('Она сказала «да»! 💕');const b=encodeURIComponent('Я согласна! 💕\n'+fmt()+'\n'+pick);const a=document.createElement('a');a.href='mailto:'+MY_EMAIL+'?subject='+s+'&body='+b;a.target='_top';document.body.appendChild(a);a.click();a.remove();$('cp').textContent='Письмо готово — нажми «Отправить» ✓'}
+</script></body></html>
